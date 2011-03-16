@@ -746,9 +746,11 @@ static void allocateGaugeField(FullGauge *cudaGauge, ReconstructType reconstruct
   else if (precision == QUDA_SINGLE_PRECISION) floatSize = sizeof(float);
   else floatSize = sizeof(float)/2;
 
-  if (cudaGauge->even || cudaGauge->odd){
-    errorQuda("Error: even/odd field is not null, probably already allocated(even=%p, odd=%p)\n", cudaGauge->even, cudaGauge->odd);
-  }
+  // fw: comment this out: cudaGauge->even might be allready allocated
+  //
+  // if (cudaGauge->even || cudaGauge->odd){
+  //   errorQuda("Error: even/odd field is not null, probably already allocated(even=%p, odd=%p)\n", cudaGauge->even, cudaGauge->odd);
+  // }
  
   cudaGauge->bytes = 4*cudaGauge->stride*reconstruct*floatSize;
   if (!cudaGauge->even) {
